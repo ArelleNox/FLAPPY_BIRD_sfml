@@ -7,6 +7,14 @@ int main() {
     // Création d'une fenêtre
     sf::RenderWindow window(sf::VideoMode(600, 850), "Flappy Bird");
 
+    sf::View view(sf::FloatRect(0.f, 0.f, 600.f, 850.f));
+    // déplacement de la vue en (200, 200)
+    view.setCenter(300.f, 425.f);
+
+    // décalage de la vue de (100, 100) (sa position finale est donc (300, 300))
+    //view.move(100.f, 0.f);
+
+
     // Charger une texture
     sf::Texture background;
     if (!background.loadFromFile("background.jpg")) {
@@ -21,16 +29,14 @@ int main() {
     // Boucle principale
     while (window.isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
-                window.close(); // Fermer la fenêtre
-            }
-            if (event.key.code == sf::Keyboard::Escape) {
+
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
                 window.close(); // Fermer avec Échap
             }
-        }
+
 
         window.clear(); // Effacer le contenu de la fenêtre
+        window.setView(view); // on l'active
         window.draw(back); // Dessiner le sprite
         window.display(); // Afficher le contenu de la fenêtre
     }
