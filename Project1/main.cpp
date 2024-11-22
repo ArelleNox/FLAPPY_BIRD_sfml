@@ -49,7 +49,7 @@ int main() {
         window.clear(); // Effacer le contenu de la fenêtre
         window.setView(view); // on l'active
         window.draw(back); // Dessiner le sprite
-        window.draw(sprite);
+        //window.draw(sprite);
         window.display(); // Afficher le contenu de la fenêtre
     }
 
