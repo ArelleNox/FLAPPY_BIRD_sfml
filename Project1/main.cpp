@@ -5,7 +5,18 @@ using namespace std;
 
 int main() {
     // Création d'une fenêtre
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Ma Première Fenêtre");
+    sf::RenderWindow window(sf::VideoMode(600, 850), "Flappy Bird");
+
+    // Charger une texture
+    sf::Texture background;
+    if (!background.loadFromFile("background.jpg")) {
+        return -1; // Erreur si le fichier est introuvable
+    }
+
+    // Associer la texture à un sprite
+    RectangleShape back(Vector2f(600, 850));
+    back.setTexture(&background);
+    back.setPosition(0, 0);
 
     // Boucle principale
     while (window.isOpen()) {
@@ -16,6 +27,7 @@ int main() {
         }
 
         window.clear(); // Effacer le contenu de la fenêtre
+        window.draw(back); // Dessiner le sprite
         window.display(); // Afficher le contenu de la fenêtre
     }
 
