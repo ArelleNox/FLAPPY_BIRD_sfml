@@ -8,7 +8,7 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(600, 850), "Flappy Bird");
 
     sf::View view(sf::FloatRect(0.f, 0.f, 600.f, 850.f));
-    // déplacement de la vue en (200, 200)
+    // déplacement de la vue en (300, 425)
     view.setCenter(300.f, 425.f);
 
     // décalage de la vue de (100, 100) (sa position finale est donc (300, 300))
@@ -20,6 +20,17 @@ int main() {
     if (!background.loadFromFile("background.jpg")) {
         return -1; // Erreur si le fichier est introuvable
     }
+
+    sf::Texture pipe;
+    if (!pipe.loadFromFile("pipe.png")) {
+        return -1; // Erreur si le fichier est introuvable
+    }
+
+
+    // Associer la texture à un sprite
+    sf::Sprite sprite;
+    sprite.setTexture(pipe);
+
 
     // Associer la texture à un sprite
     RectangleShape back(Vector2f(600, 850));
@@ -38,6 +49,7 @@ int main() {
         window.clear(); // Effacer le contenu de la fenêtre
         window.setView(view); // on l'active
         window.draw(back); // Dessiner le sprite
+        window.draw(sprite);
         window.display(); // Afficher le contenu de la fenêtre
     }
 
