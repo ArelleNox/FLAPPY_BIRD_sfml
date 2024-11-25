@@ -3,6 +3,16 @@
 using namespace sf;
 using namespace std;
 
+
+class Game {
+public:
+    Game();
+    ~Game();
+
+};
+
+
+
 int main() {
     // Création d'une fenêtre
     sf::RenderWindow window(sf::VideoMode(600, 850), "Flappy Bird");
