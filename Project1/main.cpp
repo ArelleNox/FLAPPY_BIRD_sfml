@@ -1,35 +1,29 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
 #include <iostream>
 using namespace sf;
 using namespace std;
 
 
-class Game {
-public:
-    Game();
-    ~Game();
 
-};
 
 
 
 int main() {
     // Création d'une fenêtre
-    sf::RenderWindow window(sf::VideoMode(600, 850), "Flappy Bird");
-
-    sf::View view(sf::FloatRect(0.f, 0.f, 600.f, 850.f));
-    // déplacement de la vue en (300, 425)
-    view.setCenter(300.f, 425.f);
-
-    // décalage de la vue de (100, 100) (sa position finale est donc (300, 300))
-    //view.move(100.f, 0.f);
-
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Flappy Bird");
 
     // Charger une texture
     sf::Texture background;
     if (!background.loadFromFile("background2.png")) {
         return -1; // Erreur si le fichier est introuvable
     }
+
+    // Associer la texture à un sprite
+    RectangleShape back(Vector2f(1920, 1080));
+    back.setTexture(&background);
+    back.setPosition(0, 0);
 
     sf::Texture birdTexture;
     if (!birdTexture.loadFromFile("bird.jpg")) {
@@ -38,13 +32,12 @@ int main() {
 
     sf::Sprite bird;
     bird.setTexture(birdTexture);
-    bird.setPosition(100.f, 425.f); // Position initiale
+    bird.setPosition(200.f, 540.f); // Position initiale
 
 
-    // Associer la texture à un sprite
-    RectangleShape back(Vector2f(600, 850));
-    back.setTexture(&background);
-    back.setPosition(0, 0);
+    float gravity = 0.5f;    // Gravité qui affecte l'oiseau
+    float jumpHeight = -10.f; // Hauteur du saut
+    float velocity = 0.f;     // Vitesse de l'oiseau
 
     // Boucle principale
     while (window.isOpen()) {
@@ -54,21 +47,27 @@ int main() {
                 window.close();
             }
 
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+            /*if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
                 window.close();
+            }*/
+
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
+                velocity = jumpHeight; // Appliquer une impulsion pour sauter
             }
 
 
-            if (bird.getPosition().y + bird.getGlobalBounds().height >= 850 || bird.getPosition().y <= 0) {
+            /*if (bird.getPosition().y + bird.getGlobalBounds().height >= 1080 || bird.getPosition().y <= 0) {
                 // L'oiseau touche le sol ou le haut de l'écran
                 std::cout << "Game Over!" << std::endl;
                 window.close();
-            }
+            }*/
 
         }
 
+        velocity += gravity;                  // Appliquer la gravité
+        bird.move(0.f, velocity);             // Mettre à jour la position de l'oiseau
+
         window.clear(); // Effacer le contenu de la fenêtre
-        window.setView(view); // on l'active
         window.draw(back); // Dessiner le sprite
         window.draw(bird);
         window.display(); // Afficher le contenu de la fenêtre
