@@ -36,7 +36,23 @@ int main() {
     bird.setTexture(birdTexture);
     bird.setPosition(200.f, 540.f); // Position initiale
 
+    sf::Texture uppipe;
+    if (!uppipe.loadFromFile("pi.png")) {
+        return -1; // Erreur si le fichier est introuvable
+    }
 
+    RectangleShape pipe1(Vector2f(324, 624));
+    pipe1.setTexture(&uppipe);
+    pipe1.setPosition(400, -110);
+  
+    sf::Texture downpipe;
+    if (!uppipe.loadFromFile("pip.png")) {
+        return -1; // Erreur si le fichier est introuvable
+    }
+
+    RectangleShape pipe2(Vector2f(324, 624));
+    pipe2.setTexture(&downpipe);
+    pipe2.setPosition(500, 900);
   
 
     // Boucle principale
@@ -57,6 +73,8 @@ int main() {
         window.clear(); // Effacer le contenu de la fenêtre
         window.draw(back); // Dessiner le sprite
         window.draw(bird);
+        window.draw(pipe1);
+        window.draw(pipe2);
         window.display(); // Afficher le contenu de la fenêtre
     }
 
