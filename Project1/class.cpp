@@ -6,6 +6,14 @@
 using namespace sf;
 using namespace std;
 
+
+
+
+
+
+
+
+
 /*sf::Texture birdTexture;
 if (!birdTexture.loadFromFile("flbird2.png")) {
     return -1; // Erreur si le fichier est introuvable

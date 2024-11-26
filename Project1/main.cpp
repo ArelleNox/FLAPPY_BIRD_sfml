@@ -29,12 +29,15 @@ int main() {
                 window.close();
             }
         }
+
+        //return 1;
+        window.clear(); // Effacer le contenu de la fenêtre
+        window.draw(back); // Dessiner le sprite
+        window.display(); // Afficher le contenu de la fenêtre
+
     }
 
-    //return 1;
-    window.clear(); // Effacer le contenu de la fenêtre
-    window.draw(back); // Dessiner le sprite
-    window.display(); // Afficher le contenu de la fenêtre
+    
 
 
     /*mywindow window;
