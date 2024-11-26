@@ -36,13 +36,7 @@ public:
                 }
             }
         }
-        //return 1;
-        window.clear(); // Effacer le contenu de la fenêtre
-        window.draw(back); // Dessiner le sprite
-        /*window.draw(bird);
-        window.draw(pipe1);
-        window.draw(pipe2);*/
-        window.display(); // Afficher le contenu de la fenêtre
+       
 
         return 0;
     }
