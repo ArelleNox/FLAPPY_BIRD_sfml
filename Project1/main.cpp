@@ -28,7 +28,7 @@ int main() {
 
 
     sf::Texture birdTexture;
-    if (!birdTexture.loadFromFile("bird.jpg")) {
+    if (!birdTexture.loadFromFile("flbird2.png")) {
         return -1; // Erreur si le fichier est introuvable
     }
 
@@ -37,9 +37,7 @@ int main() {
     bird.setPosition(200.f, 540.f); // Position initiale
 
 
-   /* float gravity = 0.5f;    // Gravité qui affecte l'oiseau
-    float jumpHeight = -10.f; // Hauteur du saut
-    float velocity = 0.f;     // Vitesse de l'oiseau*/
+  
 
     // Boucle principale
     while (window.isOpen()) {
@@ -53,22 +51,9 @@ int main() {
                 window.close();
             }
 
-          /*  if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
-                velocity = jumpHeight; // Appliquer une impulsion pour sauter
-            }*/
 
-
-            /*if (bird.getPosition().y + bird.getGlobalBounds().height >= 1080 || bird.getPosition().y <= 0) {
-                // L'oiseau touche le sol ou le haut de l'écran
-                std::cout << "Game Over!" << std::endl;
-                window.close();
-            }*/
 
         }
-
-       /* velocity += gravity;                  // Appliquer la gravité
-        bird.move(0.f, velocity);   */          // Mettre à jour la position de l'oiseau
-
         window.clear(); // Effacer le contenu de la fenêtre
         window.draw(back); // Dessiner le sprite
         window.draw(bird);
