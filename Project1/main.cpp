@@ -1,5 +1,6 @@
 #include "Bird.hpp"       // Pour la classe Bird
 #include "Mywindow.hpp"   // Pour la classe Mywindow
+
 using namespace sf;
 using namespace std;
 

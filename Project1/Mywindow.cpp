@@ -1,8 +1,11 @@
-#include "Mywindow.hpp"        // Inclure l'en-tête de la classe
+#include "Mywindow.hpp"       
 #include <stdexcept>           // Pour la gestion des exceptions
-
 using namespace sf;
 using namespace std;
+
+
+
+
 
 class Mywindow {
 public:

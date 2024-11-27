@@ -1,6 +1,5 @@
 #ifndef BIRD_HPP
 #define BIRD_HPP
-
 #include <SFML/Graphics.hpp>
 
 class Bird {

@@ -1,49 +1,45 @@
 #include "Bird.hpp"
 #include <stdexcept>
+
 using namespace sf;
 using namespace std;
 
+#include "Bird.hpp"
+#include <stdexcept>
 
+using namespace sf;
+using namespace std;
 
-
-class Bird {
-private:
-    sf::Texture birdTexture;
-    sf::Sprite bird;
-    float birdVelocity = .0f;
-    float gravity = .5f;
-    float jumpStrength = -10.0f;
-
-public:
+// Constructeur
+Bird::Bird() : birdVelocity(0.f), gravity(0.5f), jumpStrength(-10.0f) {
     
-    Bird() {
-        
-        if (!birdTexture.loadFromFile("flbird2.png")) {
-            throw runtime_error("Erreur : texture de l'oiseau introuvable.");
-        }
-
-        bird.setTexture(birdTexture);
-        bird.setPosition(200.f, 540.f); // Position initiale
-        
+    if (!birdTexture.loadFromFile("flbird2.png")) {
+        throw runtime_error("Erreur : texture de l'oiseau introuvable.");
     }
 
-    ~Bird(){}
+    bird.setTexture(birdTexture);
+    bird.setPosition(200.f, 540.f); //position of the bird
+}
 
-    void jump() {
+// Destructor
+Bird::~Bird() {
+    
+}
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-            birdVelocity = jumpStrength; // Saut
-        }
 
-        birdVelocity += gravity; // Appliquer la gravité
-        bird.move(0.f, birdVelocity); // Déplacer l'oiseau
+void Bird::jump() {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        birdVelocity = jumpStrength; //jump
     }
 
-    void draw(sf::RenderWindow& window) {
-        window.draw(bird); // Dessiner l'oiseau
-    }
+    birdVelocity += gravity; //  gravity
+    bird.move(0.f, birdVelocity);
+}
 
-};
+// Draw 
+void Bird::draw(sf::RenderWindow& window) {
+    window.draw(bird); 
+}
 
 
 
