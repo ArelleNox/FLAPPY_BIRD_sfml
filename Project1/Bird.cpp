@@ -19,7 +19,7 @@ public:
     Bird() {
         
         if (!birdTexture.loadFromFile("flbird2.png")) {
-            throw std::runtime_error("Erreur : texture de l'oiseau introuvable.");
+            throw runtime_error("Erreur : texture de l'oiseau introuvable.");
         }
 
         bird.setTexture(birdTexture);
