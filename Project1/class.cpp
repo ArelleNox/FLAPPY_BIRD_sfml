@@ -41,7 +41,7 @@ public:
 
         birdVelocity += gravity; // Appliquer la gravité
 
-        bird.move(0.f, birdVelocity); // Déplacer l'oiseau
+        /*bird.move(0.f, birdVelocity); // Déplacer l'oiseau*/
     }
 
 };

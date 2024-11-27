@@ -5,7 +5,7 @@
 using namespace sf;
 using namespace std;
 
-class mywindow {
+class Mywindow {
 public:
 
     int myWindow() {

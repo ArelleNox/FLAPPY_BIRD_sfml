@@ -21,6 +21,10 @@ int main() {
     back.setTexture(&background);
     back.setPosition(0, 0);
 
+    Bird bird();
+
+
+
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -33,7 +37,7 @@ int main() {
         //return 1;
         window.clear(); // Effacer le contenu de la fenêtre
         window.draw(back); // Dessiner le sprite
-        window.draw(Bird);
+        window.draw(bird);
         window.display(); // Afficher le contenu de la fenêtre
 
     }
