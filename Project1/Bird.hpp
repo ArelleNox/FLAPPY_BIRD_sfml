@@ -1,7 +1,7 @@
 #ifndef BIRD_HPP
 #define BIRD_HPP
 #include <SFML/Graphics.hpp>
-
+#include <SFML/Window/Event.hpp>
 class Bird {
 private:
     sf::Texture birdTexture;

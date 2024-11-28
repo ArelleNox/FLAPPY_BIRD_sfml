@@ -10,7 +10,7 @@ int main() {
     myWin.myWindow();
 
     // Création et gestion de l'oiseau
-    Bird    bird;
+    Bird bird;
 
     // Exemple d'intégration avec une boucle principale
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Flappy Bird");

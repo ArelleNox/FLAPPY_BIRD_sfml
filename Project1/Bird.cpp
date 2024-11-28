@@ -1,6 +1,6 @@
 #include "Bird.hpp"
 #include <stdexcept>
-#include <iostream>
+
 using namespace sf;
 using namespace std;
 
@@ -10,11 +10,7 @@ Bird::Bird() : birdVelocity(0.f), gravity(0.5f), jumpStrength(-1.0f) {
     if (!birdTexture.loadFromFile("flbird2.png")) {
         throw runtime_error("Erreur : texture de l'oiseau introuvable.");
     }
-    else {
-        cout << "Texture de l'oiseau chargée avec succès." << endl;
-    }
-    cout << "Position initiale de l'oiseau : " << bird.getPosition().x << ", " << bird.getPosition().y << endl;
-
+    
     bird.setTexture(birdTexture);
     bird.setPosition(200.f, 540.f); // Initial position of the bird
 }
@@ -22,27 +18,31 @@ Bird::Bird() : birdVelocity(0.f), gravity(0.5f), jumpStrength(-1.0f) {
 // Destructor
 Bird::~Bird() {}
 
+Event event;
 // Jump 
 void Bird::jump() {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        birdVelocity = jumpStrength; // Appliquer la force du saut
-    }
 
-    // Appliquer la gravité en continu
-    birdVelocity += gravity;
+    while(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        birdVelocity = jumpStrength; // Appliquer la force du saut
+        // Appliquer la gravité en continu
+        birdVelocity += gravity;
+        if (event.type == Event::KeyReleased && event.key.code == Keyboard::Space) {
+            // Appliquer la gravité en continu
+            birdVelocity -= gravity;
+        }
+    }
+   
 
     // Empêcher l'oiseau de sortir de l'écran
     if (bird.getPosition().y + birdVelocity < 0) {
         bird.setPosition(bird.getPosition().x, 0); // Bloquer en haut
         birdVelocity = 0;
     }
-    else if (bird.getPosition().y + birdVelocity > 1080 - bird.getGlobalBounds().height) {
-        bird.setPosition(bird.getPosition().x, 1080 - bird.getGlobalBounds().height); // Bloquer en bas
-        birdVelocity = 0;
-    }
+    
     else {
         bird.move(0.f, birdVelocity); // Déplacer l'oiseau
     }
+
 }
 
 // Draw the bird
@@ -51,8 +51,11 @@ void Bird::draw(sf::RenderWindow& window) {
 }
  
 
-
-
+// piaf tombe et meur
+/*if (bird.getPosition().y + birdVelocity > 1080 - bird.getGlobalBounds().height) {
+        bird.setPosition(bird.getPosition().x, 1080 - bird.getGlobalBounds().height); // Bloquer en bas
+        birdVelocity = 0;
+    }*/
 
 
 /*sf::Texture uppipe;
