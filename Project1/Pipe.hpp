@@ -18,10 +18,11 @@ public:
     ~Pipe();
 
     void update();
-    void draw(sf::RenderWindow& window);
+    void draw(sf::RenderWindow& window) const; // Marquer comme const
     float getXPosition() const;
     bool isOffScreen() const;
     void resetPosition(float newX);
+    bool checkCollision(const sf::Sprite& bird) const;
 };
 
 #endif // PIPE_HPP

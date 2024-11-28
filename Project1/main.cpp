@@ -5,8 +5,6 @@
 using namespace sf;
 using namespace std;
 
-
-
 int main() {
     // Utilisation de la classe Mywindow
     Mywindow myWin;
@@ -14,11 +12,10 @@ int main() {
 
     // Création et gestion de l'oiseau
     Bird bird;
-    
-    // Génération des tuyaux
-    Pipe pipe;
-    vector<Pipe> pipes;
 
+    // Génération des tuyaux
+    Pipe pipe (700.f, 200.f);
+    vector<Pipe> pipes;
 
     for (int i = 0; i < 3; ++i) {
         pipes.emplace_back(800 + i * 400); // Espacement initial entre les tuyaux
@@ -56,6 +53,7 @@ int main() {
 
         bird.jump(); // Gérer le saut de l'oiseau
 
+        // Dessiner chaque tuyau
         for (const auto& pipe : pipes) {
             pipe.draw(window);
         }

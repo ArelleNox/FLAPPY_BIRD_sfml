@@ -1,3 +1,7 @@
+
+
+
+
 #include "Pipe.hpp"
 
 Pipe::Pipe(float startX, float gapSize) : pipeSpeed(5.f), gapSize(gapSize) {
@@ -24,11 +28,11 @@ void Pipe::update() {
     bottomPipe.move(-pipeSpeed, 0);
 }
 
-void Pipe::draw(sf::RenderWindow& window) {
-    // Dessiner les deux tuyaux
+void Pipe::draw(sf::RenderWindow& window) const {
     window.draw(topPipe);
     window.draw(bottomPipe);
 }
+
 
 float Pipe::getXPosition() const {
     return topPipe.getPosition().x;
@@ -42,4 +46,10 @@ void Pipe::resetPosition(float newX) {
     // Réinitialiser les positions des tuyaux
     topPipe.setPosition(newX, -rand() % 300);
     bottomPipe.setPosition(newX, topPipe.getGlobalBounds().height + gapSize);
+}
+
+
+bool Pipe::checkCollision(const sf::Sprite& bird) const {
+    return bird.getGlobalBounds().intersects(topPipe.getGlobalBounds()) ||
+        bird.getGlobalBounds().intersects(bottomPipe.getGlobalBounds());
 }
