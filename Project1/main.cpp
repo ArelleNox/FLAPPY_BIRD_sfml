@@ -1,8 +1,11 @@
 #include "Bird.hpp"       // Pour la classe Bird
 #include "Mywindow.hpp"   // Pour la classe Mywindow
-
+#include "Pipe.hpp"
+#include <vector>
 using namespace sf;
 using namespace std;
+
+
 
 int main() {
     // Utilisation de la classe Mywindow
@@ -11,6 +14,15 @@ int main() {
 
     // Création et gestion de l'oiseau
     Bird bird;
+    
+    // Génération des tuyaux
+    Pipe pipe;
+    vector<Pipe> pipes;
+
+
+    for (int i = 0; i < 3; ++i) {
+        pipes.emplace_back(800 + i * 400); // Espacement initial entre les tuyaux
+    }
 
     // Exemple d'intégration avec une boucle principale
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Flappy Bird");
@@ -33,7 +45,20 @@ int main() {
             }
         }
 
+        for (auto& pipe : pipes) {
+            pipe.update();
+
+            // Réinitialise la position si le tuyau sort de l'écran
+            if (pipe.isOffScreen()) {
+                pipe.resetPosition(1920);
+            }
+        }
+
         bird.jump(); // Gérer le saut de l'oiseau
+
+        for (const auto& pipe : pipes) {
+            pipe.draw(window);
+        }
 
         window.clear();
         window.draw(back);

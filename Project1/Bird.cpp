@@ -21,41 +21,36 @@ Bird::~Bird() {}
 Event event;
 // Jump 
 void Bird::jump() {
-
-    while(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        birdVelocity = jumpStrength; // Appliquer la force du saut
-        // Appliquer la gravité en continu
-        birdVelocity += gravity;
-        if (event.type == Event::KeyReleased && event.key.code == Keyboard::Space) {
-            // Appliquer la gravité en continu
-            birdVelocity -= gravity;
-        }
+    // Si la touche Espace est pressée, appliquer la force du saut
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        birdVelocity = jumpStrength; // Force initiale du saut
     }
-   
 
-    // Empêcher l'oiseau de sortir de l'écran
+    // Appliquer la gravité en continu
+    birdVelocity += gravity;
+
+    /*// Empêcher l'oiseau de sortir de l'écran
     if (bird.getPosition().y + birdVelocity < 0) {
-        bird.setPosition(bird.getPosition().x, 0); // Bloquer en haut
+        bird.setPosition(bird.getPosition().x, 0); // Limite supérieure
+        birdVelocity = 0;
+    }*/
+
+     if (bird.getPosition().y + birdVelocity > 1080 - bird.getGlobalBounds().height) {
+        bird.setPosition(bird.getPosition().x, 1080 - bird.getGlobalBounds().height); // Limite inférieure
         birdVelocity = 0;
     }
-    
-    else {
-        bird.move(0.f, birdVelocity); // Déplacer l'oiseau
-    }
 
+    else {
+        bird.move(0.f, birdVelocity); // Déplacer l'oiseau selon sa vitesse verticale
+    }
 }
+
 
 // Draw the bird
 void Bird::draw(sf::RenderWindow& window) {
     window.draw(bird);
 }
- 
 
-// piaf tombe et meur
-/*if (bird.getPosition().y + birdVelocity > 1080 - bird.getGlobalBounds().height) {
-        bird.setPosition(bird.getPosition().x, 1080 - bird.getGlobalBounds().height); // Bloquer en bas
-        birdVelocity = 0;
-    }*/
 
 
 /*sf::Texture uppipe;
