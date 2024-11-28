@@ -14,7 +14,7 @@ int main() {
     Bird bird;
 
     // Génération des tuyaux
-    Pipe pipe (700.f, 200.f);
+    Pipe pipe (70.f, 200.f);
     vector<Pipe> pipes;
 
     for (int i = 0; i < 3; ++i) {
@@ -53,13 +53,15 @@ int main() {
 
         bird.jump(); // Gérer le saut de l'oiseau
 
+
+        window.clear();
+        window.draw(back);
+
         // Dessiner chaque tuyau
         for (const auto& pipe : pipes) {
             pipe.draw(window);
         }
 
-        window.clear();
-        window.draw(back);
         bird.draw(window); // Dessiner l'oiseau
         window.display();
     }

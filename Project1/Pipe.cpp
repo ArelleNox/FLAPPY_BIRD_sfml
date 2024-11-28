@@ -1,7 +1,3 @@
-
-
-
-
 #include "Pipe.hpp"
 
 Pipe::Pipe(float startX, float gapSize) : pipeSpeed(5.f), gapSize(gapSize) {
@@ -44,7 +40,7 @@ bool Pipe::isOffScreen() const {
 
 void Pipe::resetPosition(float newX) {
     // Réinitialiser les positions des tuyaux
-    topPipe.setPosition(newX, -rand() % 300);
+    topPipe.setPosition(newX, -rand() % 100);
     bottomPipe.setPosition(newX, topPipe.getGlobalBounds().height + gapSize);
 }
 

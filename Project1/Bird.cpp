@@ -5,7 +5,7 @@ using namespace sf;
 using namespace std;
 
 // Constructor
-Bird::Bird() : birdVelocity(0.f), gravity(0.5f), jumpStrength(-1.0f) {
+Bird::Bird() : birdVelocity(0.f), gravity(0.2f), jumpStrength(-1.0f) {
     // Load the texture and set the sprite
     if (!birdTexture.loadFromFile("flbird2.png")) {
         throw runtime_error("Erreur : texture de l'oiseau introuvable.");
