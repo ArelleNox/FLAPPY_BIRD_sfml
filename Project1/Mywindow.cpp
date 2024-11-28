@@ -20,7 +20,7 @@ int Mywindow::myWindow() {
     back.setTexture(&background);
     back.setPosition(0, 0);
 
-    while (window.isOpen()) {
+    /*while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
@@ -31,6 +31,6 @@ int Mywindow::myWindow() {
         window.clear();       // Effacer le contenu de la fenêtre
         window.draw(back);    // Dessiner l'arrière-plan
         window.display();     // Afficher le contenu de la fenêtre
-    }
+    }*/
     return 0;
 }
