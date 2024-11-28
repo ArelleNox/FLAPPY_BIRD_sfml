@@ -14,7 +14,7 @@ private:
     float gapSize;
 
 public:
-    Pipe(float startX, float gapSize = 200.f);
+    Pipe(float startX = 200.f, float gapSize = 200.f);
     ~Pipe();
 
     void update();

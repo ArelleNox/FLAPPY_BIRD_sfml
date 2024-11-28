@@ -1,6 +1,6 @@
 #include "Pipe.hpp"
 
-Pipe::Pipe(float startX, float gapSize) : pipeSpeed(0.1f), gapSize(gapSize) {
+Pipe::Pipe(float startX, float gapSize) : pipeSpeed(0.1f), gapSize(200.f) {
     // Charger la texture des tuyaux
     if (!pipeTexture.loadFromFile("pip.png")) {
         throw std::runtime_error("Erreur : texture des tuyaux introuvable.");
@@ -44,9 +44,11 @@ bool Pipe::isOffScreen() const {
 
 void Pipe::resetPosition(float newX) {
     // Réinitialiser les positions des tuyaux
-    topPipe.setPosition(newX, -rand() % 300);
-    bottomPipe.setPosition(newX, topPipe.getGlobalBounds().height + gapSize);
+    float randomHeight = rand() % 300 + 100;
+    topPipe.setPosition(newX, randomHeight * -1); // Positionner le tuyau supérieur à randomHeight pixels au-dessus de l'écran
+    bottomPipe.setPosition(newX, randomHeight + gapSize); // Positionner le tuyau inférieur en fonction de la taille du gap
 }
+
 
 
 bool Pipe::checkCollision(const sf::Sprite& bird) const {
