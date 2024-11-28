@@ -56,13 +56,11 @@ int main() {
 
         window.clear();
         window.draw(back);
-
+        bird.draw(window); // Dessiner l'oiseau
         // Dessiner chaque tuyau
         for (const auto& pipe : pipes) {
             pipe.draw(window);
         }
-
-        bird.draw(window); // Dessiner l'oiseau
         window.display();
     }
 

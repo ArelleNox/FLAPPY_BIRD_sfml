@@ -1,6 +1,6 @@
 #include "Pipe.hpp"
 
-Pipe::Pipe(float startX, float gapSize) : pipeSpeed(5.f), gapSize(gapSize) {
+Pipe::Pipe(float startX, float gapSize) : pipeSpeed(0.2f), gapSize(gapSize) {
     // Charger la texture des tuyaux
     if (!pipeTexture.loadFromFile("pip.png")) {
         throw std::runtime_error("Erreur : texture des tuyaux introuvable.");
