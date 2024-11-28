@@ -1,53 +1,55 @@
 #include "Bird.hpp"
 #include <stdexcept>
+#include <iostream>
 using namespace sf;
 using namespace std;
 
+// Constructor
+Bird::Bird() : birdVelocity(0.f), gravity(0.5f), jumpStrength(-10.0f) {
+    // Load the texture and set the sprite
+    if (!birdTexture.loadFromFile("flbird2.png")) {
+        throw runtime_error("Erreur : texture de l'oiseau introuvable.");
+    }
+    else {
+        cout << "Texture de l'oiseau chargée avec succès." << endl;
+    }
+    cout << "Position initiale de l'oiseau : " << bird.getPosition().x << ", " << bird.getPosition().y << endl;
 
+    bird.setTexture(birdTexture);
+    bird.setPosition(200.f, 540.f); // Initial position of the bird
+}
 
+// Destructor
+Bird::~Bird() {}
 
-class Bird {
-private:
-    sf::Texture birdTexture;
-    sf::Sprite bird;
-    float birdVelocity = .0f;
-    float gravity = .5f;
-    float jumpStrength = -10.0f;
+// Jump 
+void Bird::jump() {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        birdVelocity = jumpStrength; //  jump
 
-public:
-    
-    Bird() {
-        
-        if (!birdTexture.loadFromFile("flbird2.png")) {
-            throw runtime_error("Erreur : texture de l'oiseau introuvable.");
+        // Empêcher l'oiseau de sortir de l'écran
+        if (bird.getPosition().y + birdVelocity < 0) {
+            bird.setPosition(bird.getPosition().x, 0);
+            birdVelocity = 0;
         }
-
-        bird.setTexture(birdTexture);
-        bird.setPosition(200.f, 540.f); // Position initiale
-        
-    }
-
-    ~Bird(){}
-
-    void jump() {
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-            birdVelocity = jumpStrength; // Saut
+        else if (bird.getPosition().y + birdVelocity > 1080 - bird.getGlobalBounds().height) {
+            bird.setPosition(bird.getPosition().x, 1080 - bird.getGlobalBounds().height);
+            birdVelocity = 0;
         }
-
-        birdVelocity += gravity; // Appliquer la gravité
-        bird.move(0.f, birdVelocity); // Déplacer l'oiseau
+        else {
+            bird.move(0.f, birdVelocity);
+        }
     }
 
-    void draw(sf::RenderWindow& window) {
-        window.draw(bird); // Dessiner l'oiseau
-    }
+    /*birdVelocity += gravity; // Apply gravity
+    bird.move(0.f, birdVelocity); // Move the bird based on velocity*/
+}
 
-};
-
-
-
-
+// Draw the bird
+void Bird::draw(sf::RenderWindow& window) {
+    window.draw(bird);
+}
+ 
 
 
 
