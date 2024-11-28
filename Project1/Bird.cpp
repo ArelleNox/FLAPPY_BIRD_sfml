@@ -5,7 +5,7 @@ using namespace sf;
 using namespace std;
 
 // Constructor
-Bird::Bird() : birdVelocity(0.f), gravity(0.5f), jumpStrength(-10.0f) {
+Bird::Bird() : birdVelocity(0.f), gravity(0.5f), jumpStrength(-1.0f) {
     // Load the texture and set the sprite
     if (!birdTexture.loadFromFile("flbird2.png")) {
         throw runtime_error("Erreur : texture de l'oiseau introuvable.");
@@ -25,24 +25,24 @@ Bird::~Bird() {}
 // Jump 
 void Bird::jump() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        birdVelocity = jumpStrength; //  jump
-
-        // Empêcher l'oiseau de sortir de l'écran
-        if (bird.getPosition().y + birdVelocity < 0) {
-            bird.setPosition(bird.getPosition().x, 0);
-            birdVelocity = 0;
-        }
-        else if (bird.getPosition().y + birdVelocity > 1080 - bird.getGlobalBounds().height) {
-            bird.setPosition(bird.getPosition().x, 1080 - bird.getGlobalBounds().height);
-            birdVelocity = 0;
-        }
-        else {
-            bird.move(0.f, birdVelocity);
-        }
+        birdVelocity = jumpStrength; // Appliquer la force du saut
     }
 
-    /*birdVelocity += gravity; // Apply gravity
-    bird.move(0.f, birdVelocity); // Move the bird based on velocity*/
+    // Appliquer la gravité en continu
+    birdVelocity += gravity;
+
+    // Empêcher l'oiseau de sortir de l'écran
+    if (bird.getPosition().y + birdVelocity < 0) {
+        bird.setPosition(bird.getPosition().x, 0); // Bloquer en haut
+        birdVelocity = 0;
+    }
+    else if (bird.getPosition().y + birdVelocity > 1080 - bird.getGlobalBounds().height) {
+        bird.setPosition(bird.getPosition().x, 1080 - bird.getGlobalBounds().height); // Bloquer en bas
+        birdVelocity = 0;
+    }
+    else {
+        bird.move(0.f, birdVelocity); // Déplacer l'oiseau
+    }
 }
 
 // Draw the bird
