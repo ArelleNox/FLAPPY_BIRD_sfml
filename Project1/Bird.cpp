@@ -25,7 +25,10 @@ void Bird::jump() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         birdVelocity = jumpStrength; // Force initiale du saut
     }
-
+   
+    if (event.type == Event::KeyReleased && event.key.code == Keyboard::Space) {
+        birdVelocity += jumpStrength;
+    }
     // Appliquer la gravité en continu
     birdVelocity += gravity;
 
