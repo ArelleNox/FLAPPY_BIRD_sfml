@@ -1,6 +1,6 @@
 #include "Pipe.hpp"
 
-Pipe::Pipe(float startX, float gapSize) : pipeSpeed(0.2f), gapSize(gapSize) {
+Pipe::Pipe(float startX, float gapSize) : pipeSpeed(0.1f), gapSize(gapSize) {
     // Charger la texture des tuyaux
     if (!pipeTexture.loadFromFile("pip.png")) {
         throw std::runtime_error("Erreur : texture des tuyaux introuvable.");
@@ -40,7 +40,7 @@ bool Pipe::isOffScreen() const {
 
 void Pipe::resetPosition(float newX) {
     // Réinitialiser les positions des tuyaux
-    topPipe.setPosition(newX, -rand() % 100);
+    topPipe.setPosition(newX, -rand() % 300);
     bottomPipe.setPosition(newX, topPipe.getGlobalBounds().height + gapSize);
 }
 

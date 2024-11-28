@@ -22,14 +22,14 @@ int main() {
     }
 
     // Exemple d'intégration avec une boucle principale
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Flappy Bird");
+    sf::RenderWindow window(sf::VideoMode(600, 800), "Flappy Bird");
 
     sf::Texture background;
     if (!background.loadFromFile("background2.png")) {
         return -1; // Erreur si le fichier est introuvable
     }
 
-    sf::RectangleShape back(sf::Vector2f(1920, 1080));
+    sf::RectangleShape back(sf::Vector2f(600, 800));
     back.setTexture(&background);
     back.setPosition(0, 0);
 
@@ -47,7 +47,7 @@ int main() {
 
             // Réinitialise la position si le tuyau sort de l'écran
             if (pipe.isOffScreen()) {
-                pipe.resetPosition(1920);
+                pipe.resetPosition(600);
             }
         }
 
