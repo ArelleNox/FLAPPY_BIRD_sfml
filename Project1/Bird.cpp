@@ -1,49 +1,55 @@
 #include "Bird.hpp"
 #include <stdexcept>
-
+#include <iostream>
 using namespace sf;
 using namespace std;
 
-#include "Bird.hpp"
-#include <stdexcept>
-
-using namespace sf;
-using namespace std;
-
-// Constructeur
+// Constructor
 Bird::Bird() : birdVelocity(0.f), gravity(0.5f), jumpStrength(-10.0f) {
-    
+    // Load the texture and set the sprite
     if (!birdTexture.loadFromFile("flbird2.png")) {
         throw runtime_error("Erreur : texture de l'oiseau introuvable.");
     }
+    else {
+        cout << "Texture de l'oiseau chargée avec succès." << endl;
+    }
+    cout << "Position initiale de l'oiseau : " << bird.getPosition().x << ", " << bird.getPosition().y << endl;
 
     bird.setTexture(birdTexture);
-    bird.setPosition(200.f, 540.f); //position of the bird
+    bird.setPosition(200.f, 540.f); // Initial position of the bird
 }
 
 // Destructor
-Bird::~Bird() {
-    
-}
+Bird::~Bird() {}
 
-
+// Jump 
 void Bird::jump() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        birdVelocity = jumpStrength; //jump
+        birdVelocity = jumpStrength; //  jump
+
+        // Empêcher l'oiseau de sortir de l'écran
+        if (bird.getPosition().y + birdVelocity < 0) {
+            bird.setPosition(bird.getPosition().x, 0);
+            birdVelocity = 0;
+        }
+        else if (bird.getPosition().y + birdVelocity > 1080 - bird.getGlobalBounds().height) {
+            bird.setPosition(bird.getPosition().x, 1080 - bird.getGlobalBounds().height);
+            birdVelocity = 0;
+        }
+        else {
+            bird.move(0.f, birdVelocity);
+        }
     }
 
-    birdVelocity += gravity; //  gravity
-    bird.move(0.f, birdVelocity);
+    /*birdVelocity += gravity; // Apply gravity
+    bird.move(0.f, birdVelocity); // Move the bird based on velocity*/
 }
 
-// Draw 
+// Draw the bird
 void Bird::draw(sf::RenderWindow& window) {
-    window.draw(bird); 
+    window.draw(bird);
 }
-
-
-
-
+ 
 
 
 
