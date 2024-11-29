@@ -16,13 +16,9 @@ int main() {
 
     // Génération des tuyaux
     Pipe pipe (100.f, 400.f);
-    vector<Pipe> pipes;
+
 
     Clock deltaClock;
-
-    for (int i = 0; i < 3; ++i) {
-        pipes.emplace_back(800 + i * 400); // Espacement initial entre les tuyaux
-    }
 
     // Exemple d'intégration avec une boucle principale
     sf::RenderWindow window(sf::VideoMode(600, 800), "Flappy Bird");
@@ -35,6 +31,12 @@ int main() {
     sf::RectangleShape back(sf::Vector2f(600, 800));
     back.setTexture(&background);
     back.setPosition(0, 0);
+
+    // Génération des tuyaux
+    std::vector<Pipe> pipes;
+    for (int i = 0; i < 3; ++i) {
+        pipes.emplace_back(600 + i * 400, 180.f); // Espacement et gap ajustables
+    }
 
     while (window.isOpen()) {
         sf::Event event;
@@ -51,12 +53,13 @@ int main() {
             }
         }
 
+        // Mettre à jour les tuyaux
         for (auto& pipe : pipes) {
             pipe.update();
 
-            // Réinitialise la position si le tuyau sort de l'écran
+            // Réinitialiser les tuyaux qui sont sortis de l'écran
             if (pipe.isOffScreen()) {
-                pipe.resetPosition(600);
+                pipe.resetPosition(1200.f);
             }
         }
 
@@ -65,12 +68,11 @@ int main() {
 
 
         window.clear();
-        window.draw(back);
 
-        bird.draw(window); // Dessiner l'oiseau
-        // Dessiner chaque tuyau
+        window.draw(back);
+        bird.draw(window); // Dessiner l'oiseau    
         for (const auto& pipe : pipes) {
-            pipe.draw(window);
+            pipe.draw(window);// Dessiner chaque tuyau
         }
 
         window.display();
