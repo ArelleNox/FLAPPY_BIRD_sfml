@@ -56,16 +56,10 @@ int main() {
             if (event.type == sf::Event::Closed ||
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
                 window.close();
-            }
-
-            if (event.type == sf::Event::Closed) {
-                window.close();
-            }
-
-            // Gérer l'appui sur la touche "Espace"
+            }            
+        
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
                 bird.jump(); // Faire sauter l'oiseau
-                cout << "Space" << endl;
             }
 
             // Gestion du curseur par déplacement avec la souris
