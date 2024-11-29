@@ -9,8 +9,8 @@ using namespace std;
 // Constructor
 Bird::Bird() {
     birdVelocity = .0f;
-    gravity = 250.0f;
-    jumpStrength = 100.0f;
+    gravity = 450.0f;
+    jumpStrength = 300.0f;
 
     // Load the texture and set the sprite
     if (!birdTexture.loadFromFile("flbird2.png")) {
