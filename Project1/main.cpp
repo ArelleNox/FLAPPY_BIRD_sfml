@@ -15,7 +15,7 @@ int main() {
     Bird bird;
 
     // Génération des tuyaux
-    Pipe pipe (100.f, 400.f);
+    Pipe pipe (100.f, 600.f);
 
 
     Clock deltaClock;
@@ -39,6 +39,7 @@ int main() {
     }
 
     while (window.isOpen()) {
+        Time timeSinceLastFrame = deltaClock.restart();
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed ||
@@ -55,7 +56,7 @@ int main() {
 
         // Mettre à jour les tuyaux
         for (auto& pipe : pipes) {
-            pipe.update();
+            pipe.update(timeSinceLastFrame.asSeconds());
 
             // Réinitialiser les tuyaux qui sont sortis de l'écran
             if (pipe.isOffScreen()) {
@@ -64,7 +65,7 @@ int main() {
         }
 
         // Mettre à jour l'oiseau
-        bird.update(deltaClock.restart().asSeconds());
+        bird.update(timeSinceLastFrame.asSeconds());
 
 
         window.clear();

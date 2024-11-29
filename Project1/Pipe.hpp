@@ -18,7 +18,7 @@ public:
     Pipe(float startX, float gapSize = 200.f);
     ~Pipe();
 
-    void update();                                 // Déplacer les tuyaux
+    void update(float deltaTime);                                 // Déplacer les tuyaux
     void draw(sf::RenderWindow& window) const;     // Dessiner les tuyaux
     float getXPosition() const;                   // Récupérer la position X
     bool isOffScreen() const;                     // Vérifier si les tuyaux sont hors de l'écran

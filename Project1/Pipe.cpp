@@ -1,18 +1,19 @@
 #include "Pipe.hpp"
+#include <SFML/Graphics.hpp>
 
-Pipe::Pipe(float startX, float gapSize) : pipeSpeed(2.0f), gapSize(gapSize) {
+Pipe::Pipe(float startX, float gapSize) : pipeSpeed(200.0f), gapSize(gapSize) {
     // Charger la texture des tuyaux
-    if (!pipeTexture.loadFromFile("pip.png")) {
-        throw std::runtime_error("Erreur : texture des tuyaux introuvable.");
-    }
+    
+    sf::RectangleShape pipeTexture(sf::Vector2f(50.f, 100.f));
+    pipeTexture.setFillColor(sf::Color::Green); // Remplissage rouge
 
     // Générer une hauteur aléatoire pour les tuyaux
-    float randomHeight = rand() % 300 + 100;
+    float randomHeight = rand() % 300 + 10;
 
     // Configurer le tuyau supérieur
     topPipe.setTexture(pipeTexture);
     topPipe.setScale(1.f, -1.f); // Inverser le tuyau pour qu'il pointe vers le bas
-    topPipe.setPosition(startX, randomHeight * -1);
+    topPipe.setPosition(startX, randomHeight);
 
     // Configurer le tuyau inférieur
     bottomPipe.setTexture(pipeTexture);
@@ -21,10 +22,10 @@ Pipe::Pipe(float startX, float gapSize) : pipeSpeed(2.0f), gapSize(gapSize) {
 
 Pipe::~Pipe() {}
 
-void Pipe::update() {
+void Pipe::update(float deltaTime) {
     // Déplacer les tuyaux vers la gauche
-    topPipe.move(-pipeSpeed, 0.f);
-    bottomPipe.move(-pipeSpeed, 0.f);
+    topPipe.move(-pipeSpeed * deltaTime, 0.f);
+    bottomPipe.move(-pipeSpeed * deltaTime, 0.f);
 }
 
 void Pipe::draw(sf::RenderWindow& window) const {
