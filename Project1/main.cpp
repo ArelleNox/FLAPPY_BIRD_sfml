@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Bird.hpp"       // Pour la classe Bird
 #include "Mywindow.hpp"   // Pour la classe Mywindow
 #include "Pipe.hpp"
@@ -16,6 +17,8 @@ int main() {
     // Génération des tuyaux
     Pipe pipe (100.f, 400.f);
     vector<Pipe> pipes;
+
+    Clock deltaClock;
 
     for (int i = 0; i < 3; ++i) {
         pipes.emplace_back(800 + i * 400); // Espacement initial entre les tuyaux
@@ -40,6 +43,12 @@ int main() {
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
                 window.close();
             }
+
+            // Gérer l'appui sur la touche "Espace"
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
+                bird.jump(); // Faire sauter l'oiseau
+                cout << "Space" << endl;
+            }
         }
 
         for (auto& pipe : pipes) {
@@ -51,7 +60,8 @@ int main() {
             }
         }
 
-        bird.jump(); // Gérer le saut de l'oiseau
+        // Mettre à jour l'oiseau
+        bird.update(deltaClock.restart().asSeconds());
 
 
         window.clear();
