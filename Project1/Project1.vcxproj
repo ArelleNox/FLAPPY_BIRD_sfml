@@ -136,11 +136,13 @@
     <ClCompile Include="Bird.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mywindow.cpp" />
+    <ClCompile Include="overlay.cpp" />
     <ClCompile Include="Pipe.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bird.hpp" />
     <ClInclude Include="Mywindow.hpp" />
+    <ClInclude Include="overlay.hpp" />
     <ClInclude Include="Pipe.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

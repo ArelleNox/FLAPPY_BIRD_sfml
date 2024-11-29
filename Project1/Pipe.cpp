@@ -1,11 +1,10 @@
 #include "Pipe.hpp"
-#include <SFML/Graphics.hpp>
 
 Pipe::Pipe(float startX, float gapSize) : pipeSpeed(200.0f), gapSize(gapSize) {
     // Charger la texture des tuyaux
-    
-    sf::RectangleShape pipeTexture(sf::Vector2f(50.f, 100.f));
-    pipeTexture.setFillColor(sf::Color::Green); // Remplissage rouge
+    if (!pipeTexture.loadFromFile("pip.png")) {
+        throw std::runtime_error("Erreur : texture des tuyaux introuvable.");
+    }
 
     // Générer une hauteur aléatoire pour les tuyaux
     float randomHeight = rand() % 300 + 10;

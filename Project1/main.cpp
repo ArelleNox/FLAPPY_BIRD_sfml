@@ -1,7 +1,8 @@
-#include <iostream>
 #include "Bird.hpp"       // Pour la classe Bird
 #include "Mywindow.hpp"   // Pour la classe Mywindow
 #include "Pipe.hpp"
+#include "overlay.hpp"
+#include <iostream>
 #include <vector>
 using namespace sf;
 using namespace std;
@@ -17,6 +18,16 @@ int main() {
     // Génération des tuyaux
     Pipe pipe (100.f, 600.f);
 
+    Overlay overlay;
+
+    // Curseur (un rectangle simple)
+    sf::RectangleShape cursor(sf::Vector2f(20.f, 10.f));
+    cursor.setFillColor(sf::Color::Cyan);
+    cursor.setPosition(150.f, 750.f); // Placer le curseur en bas de l'écran
+
+    // Variables pour l'opacité
+    float opacity = 0.f;  // Opacité initiale (complètement transparent)
+    float cursorX = 150.f; 
 
     Clock deltaClock;
 
@@ -52,6 +63,15 @@ int main() {
                 bird.jump(); // Faire sauter l'oiseau
                 cout << "Space" << endl;
             }
+
+            // Gestion du curseur par déplacement avec la souris
+            if (event.type == sf::Event::MouseMoved) {
+                // Déplacer le curseur horizontalement avec la souris
+                if (event.mouseMove.x >= 150 && event.mouseMove.x <= 450) {
+                    cursorX = event.mouseMove.x;  // Limiter entre 150 et 450
+                    opacity = (cursorX - 150) * 255.f / 300.f;  // Calculer l'opacité
+                }
+            }
         }
 
         // Mettre à jour les tuyaux
@@ -64,9 +84,11 @@ int main() {
             }
         }
 
+        // Mettre à jour l'opacité de l'overlay
+        overlay.setOpacity(opacity);
+        
         // Mettre à jour l'oiseau
         bird.update(timeSinceLastFrame.asSeconds());
-
 
         window.clear();
 
@@ -75,6 +97,12 @@ int main() {
         for (const auto& pipe : pipes) {
             pipe.draw(window);// Dessiner chaque tuyau
         }
+
+        overlay.draw(window);    // Dessiner l'overlay
+        
+        // Dessiner le curseur
+        cursor.setPosition(cursorX - cursor.getSize().x / 2, 750.f); // Centrer le curseur
+        window.draw(cursor);
 
         window.display();
     }

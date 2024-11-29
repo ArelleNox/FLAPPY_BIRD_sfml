@@ -39,12 +39,10 @@ void Bird::update(float deltaTime) {
 
     // Empêcher l'oiseau de dépasser les limites de l'écran
     if (newY < 0) {
-        cout << "There" << endl;
         newY = 0;
         birdVelocity = 0;
     }
     else if (newY > 800 - bird.getGlobalBounds().height) {
-        //cout << "Here" << endl;
         newY = 800 - bird.getGlobalBounds().height;
         birdVelocity = 0;
     }
