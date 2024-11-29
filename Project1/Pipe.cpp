@@ -1,4 +1,7 @@
 #include "Pipe.hpp"
+#include <iostream>
+
+
 
 Pipe::Pipe(float startX, float gapSize) : pipeSpeed(200.0f), gapSize(gapSize) {
     // Charger la texture des tuyaux
@@ -29,7 +32,7 @@ void Pipe::update(float deltaTime) {
 
 void Pipe::draw(sf::RenderWindow& window) const {
     // Dessiner les tuyaux sur la fenêtre
-    window.draw(topPipe);
+    window.draw(topPipe);  
     window.draw(bottomPipe);
 }
 
@@ -53,6 +56,10 @@ void Pipe::resetPosition(float newX) {
 
 bool Pipe::checkCollision(const sf::Sprite& bird) const {
     // Vérifier si l'oiseau entre en collision avec l'un des deux tuyaux
-    return bird.getGlobalBounds().intersects(topPipe.getGlobalBounds()) ||
-           bird.getGlobalBounds().intersects(bottomPipe.getGlobalBounds());
+    if (bird.getGlobalBounds().intersects(topPipe.getGlobalBounds()) ||
+        bird.getGlobalBounds().intersects(bottomPipe.getGlobalBounds())) {
+        std::cout << "game over" << std::endl;
+      
+    }
+
 }

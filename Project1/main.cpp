@@ -26,7 +26,7 @@ int main() {
     cursor.setPosition(150.f, 750.f); // Placer le curseur en bas de l'écran
 
     // Variables pour l'opacité
-    float opacity = 0.f;  // Opacité initiale (complètement transparent)
+    float opacity = 0.f;
     float cursorX = 150.f; 
 
     Clock deltaClock;
@@ -55,6 +55,10 @@ int main() {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed ||
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+                window.close();
+            }
+
+            if (event.type == sf::Event::Closed) {
                 window.close();
             }
 
